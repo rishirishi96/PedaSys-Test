@@ -1,0 +1,45 @@
+package pedasysCodes;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+public class firstScenario {
+	WebDriver d;
+	@Given("^Open Chrome Browser and open the website$")
+	public void login() throws Throwable 
+	{
+		System.out.println("Launching Chrome");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Rishi\\Pictures\\libs\\webdrivers\\driverchrome.exe");
+		d = new ChromeDriver();
+		d.manage().window().maximize();
+		d.get("http://www.growthengineering.co.uk");
+		d.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+	}
+	@When("^Hover over the menus$")
+	public void search_for_the_elements() throws Throwable{
+		System.out.println("into Chrome");
+		//d.findElement(By.xpath("//a[@id='contact-button']")).click();
+		d.findElement(By.linkText("Our Products")).click();
+		d.findElement(By.linkText("Our Approach")).click();
+		d.findElement(By.linkText("Resources")).click();
+		d.findElement(By.linkText("About Us")).click();
+		
+		
+	}
+	@Then("^Close browser$")
+	public void logon_to_the_website() throws Throwable{
+		Thread.sleep(5000);
+		d.close();
+	}
+}
