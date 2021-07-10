@@ -1,0 +1,11 @@
+Feature: Test twitter smoke scenario
+
+  Scenario: Check that all menu links in the top navigation work
+    Given Open Chrome Browser and open the website
+    When Hover over the menus
+    Then Close browser
+
+  Scenario: Check that form validation works on the contact page
+    Given Open Chrome Browser and login onto the website
+    When Enter the credentials in the fields
+    Then Close the browser
