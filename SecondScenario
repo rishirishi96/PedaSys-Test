@@ -1,0 +1,56 @@
+package pedasysCodes;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Select;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+public class secondScenario {
+	WebDriver d;
+	@Given("^Open Chrome Browser and login onto the website$")
+	public void login() throws Throwable 
+	{
+		System.out.println("Launching Chrome");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Rishi\\Pictures\\libs\\webdrivers\\driverchrome.exe");
+		d = new ChromeDriver();
+		d.manage().window().maximize();
+		d.get("http://www.growthengineering.co.uk");
+		d.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+	}
+	@When("^Enter the credentials in the fields$")
+	public void search_for_the_elements() throws Throwable{
+		
+		d.findElement(By.xpath("//a[@id='contact-button']")).click();
+		d.findElement(By.xpath("//input[@name='full_name']")).sendKeys("Rishi");
+		d.findElement(By.xpath("//input[@name='phone']")).sendKeys("9876543210");
+		d.findElement(By.xpath("//input[@name='company']")).sendKeys("PEDASYS");
+		d.findElement(By.xpath("//input[@name='email']")).sendKeys("Rishi@.com");
+		
+		JavascriptExecutor j=(JavascriptExecutor)d;
+		j.executeScript("window.scrollBy(0,300)");
+		
+		Select s=new Select(d.findElement(By.xpath("//select[@name='country_']")));
+		s.selectByVisibleText("India");
+		
+		Select s1=new Select(d.findElement(By.xpath("//select[@name='role_description']")));
+		s1.selectByVisibleText("Other");
+		
+		Select s2=new Select(d.findElement(By.xpath("//select[contains(@id,'what_is')]")));
+		s2.selectByIndex(2);
+		
+		d.findElement(By.xpath("//input[@type='checkbox']")).click();
+	}
+	@Then("^Close the browser$")
+	public void logon_to_the_website() throws Throwable{
+		Thread.sleep(5000);
+		d.close();
+	}
+}
